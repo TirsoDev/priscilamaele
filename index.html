@@ -45,6 +45,7 @@
             overflow-x: hidden;
             width: 100%;
             max-width: 100%;
+            overscroll-behavior-y: none;
         }
 
         body {
@@ -60,7 +61,7 @@
             max-width: 100%;
             position: relative;
             touch-action: pan-y;
-            overscroll-behavior-x: none;
+            overscroll-behavior: none;
         }
 
         h1, h2, h3, .serif {
@@ -519,7 +520,7 @@
             font-size: 1.1rem;
             letter-spacing: 3px;
             border: 2px solid var(--gold); /* Borda ao redor de todo o elemento */
-            margin-top: 1rem;
+            margin-bottom: 1.75rem;
             text-transform: uppercase;
             position: relative;
             overflow: hidden;
@@ -863,13 +864,11 @@
     <!-- Seção Agendamento & QR -->
     <section class="container agendamento" id="agendamento">
         <div>
-            <h2>Agende sua consulta</h2>
+            <div class="title-wine-box">AGENDE UMA CONSULTA</div>
             <p class="subtitle">ORIENTAÇÃO JURÍDICA. SOLUÇÕES ESTRATÉGICAS. DECISÕES SEGURAS.</p>
             <p style="margin-bottom: 2rem; color: var(--text-muted); max-width: 600px; margin-left: auto; margin-right: auto;">
                 Conte com um atendimento altamente personalizado para mapear e encontrar o caminho mais seguro e eficiente para o seu caso.
             </p>
-            
-            <div class="title-wine-box">AGENDE UMA CONSULTA</div>
         </div>
 
         <div class="qr-section">
