@@ -16,9 +16,9 @@
     <style>
         /* ================= Variáveis de Cores (Vinho mais escuro) ================= */
         :root {
-            --wine-dark: #1f0509;  
-            --wine: #2a070e;      
-            --wine-light: #400b14; 
+            --wine-dark: #2b0a12;  
+            --wine: #3d0f1a;      
+            --wine-light: #551625; 
             
             --gold: #d4af37;      
             --gold-light: #f3e5ab; 
@@ -41,6 +41,12 @@
             scroll-behavior: smooth;
         }
 
+        html {
+            overflow-x: hidden;
+            width: 100%;
+            max-width: 100%;
+        }
+
         body {
             font-family: 'Montserrat', sans-serif;
             background-color: var(--cream);
@@ -51,6 +57,10 @@
             flex-direction: column;
             min-height: 100vh;
             width: 100%;
+            max-width: 100%;
+            position: relative;
+            touch-action: pan-y;
+            overscroll-behavior-x: none;
         }
 
         h1, h2, h3, .serif {
@@ -198,7 +208,7 @@
             content: '';
             position: absolute;
             top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(31, 5, 9, 0.80); 
+            background: rgba(43, 10, 18, 0.80); 
             z-index: 0;
             pointer-events: none;
         }
@@ -644,7 +654,6 @@
             .nav-menu { display: none; /* Poderia adicionar menu mobile depois se desejar */ }
             
             .hero { margin-top: 61px; }
-            .hero-logo { font-size: 2.4rem; letter-spacing: 2px; }
             .hero-subtitle { font-size: 0.8rem; letter-spacing: 3px; }
             
             .container { padding: 4rem 1.5rem; width: 100%; }
@@ -725,8 +734,9 @@
             }
 
             .hero .hero-logo {
-                font-size: 2.7rem;
-                letter-spacing: 3px;
+                font-size: clamp(1.5rem, 8vw, 2.4rem);
+                letter-spacing: clamp(0.5px, 0.8vw, 2px);
+                white-space: nowrap;
             }
         }
 
@@ -854,7 +864,7 @@
     <section class="container agendamento" id="agendamento">
         <div>
             <h2>Agende sua consulta</h2>
-            <p class="subtitle">ORIENTAÇÃO JURÍDICA - SOLUÇÕES ESTRATÉGICAS - DECISÕES SEGURAS</p>
+            <p class="subtitle">ORIENTAÇÃO JURÍDICA. SOLUÇÕES ESTRATÉGICAS. DECISÕES SEGURAS.</p>
             <p style="margin-bottom: 2rem; color: var(--text-muted); max-width: 600px; margin-left: auto; margin-right: auto;">
                 Conte com um atendimento altamente personalizado para mapear e encontrar o caminho mais seguro e eficiente para o seu caso.
             </p>
