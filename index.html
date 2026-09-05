@@ -45,7 +45,6 @@
             overflow-x: hidden;
             width: 100%;
             max-width: 100%;
-            overscroll-behavior-y: none;
         }
 
         body {
@@ -60,8 +59,6 @@
             width: 100%;
             max-width: 100%;
             position: relative;
-            touch-action: pan-y;
-            overscroll-behavior: none;
         }
 
         h1, h2, h3, .serif {
@@ -520,7 +517,7 @@
             font-size: 1.1rem;
             letter-spacing: 3px;
             border: 2px solid var(--gold); /* Borda ao redor de todo o elemento */
-            margin-bottom: 1.75rem;
+            margin-top: 1rem;
             text-transform: uppercase;
             position: relative;
             overflow: hidden;
@@ -641,6 +638,13 @@
         }
 
         @media (max-width: 768px) {
+            html {
+                overscroll-behavior-y: none;
+            }
+            body {
+                touch-action: pan-y;
+                overscroll-behavior: none;
+            }
             .navbar {
                 justify-content: center !important;
                 padding: 0.6rem 1rem !important;
@@ -864,11 +868,12 @@
     <!-- Seção Agendamento & QR -->
     <section class="container agendamento" id="agendamento">
         <div>
-            <div class="title-wine-box">AGENDE UMA CONSULTA</div>
             <p class="subtitle">ORIENTAÇÃO JURÍDICA. SOLUÇÕES ESTRATÉGICAS. DECISÕES SEGURAS.</p>
             <p style="margin-bottom: 2rem; color: var(--text-muted); max-width: 600px; margin-left: auto; margin-right: auto;">
                 Conte com um atendimento altamente personalizado para mapear e encontrar o caminho mais seguro e eficiente para o seu caso.
             </p>
+            
+            <div class="title-wine-box">AGENDE UMA CONSULTA</div>
         </div>
 
         <div class="qr-section">
@@ -921,6 +926,20 @@
             });
         });
 
+        // No mobile não existe "hover", então giramos a moeda toda vez que o
+        // card entra na tela ao rolar a página (para cima ou para baixo).
+        if ('IntersectionObserver' in window && cards.length) {
+            const cardsObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        triggerCoinSpin(entry.target);
+                    }
+                });
+            }, { threshold: 0.4 });
+
+            cards.forEach(card => cardsObserver.observe(card));
+        }
+
         // Linha do tempo dos motivos: desenha-se progressivamente conforme a rolagem,
         // revelando cada motivo no instante em que a linha "chega" até ele.
         const motivosAxis = document.getElementById('motivosList') ? document.querySelector('.motivos-axis') : null;
@@ -930,6 +949,7 @@
         if (motivosAxis && motivosLineFill && motivoRows.length) {
             let rowCenters = [];
             let usesTranslate = true;
+            let maxProgress = 0;
 
             function recalcRowCenters() {
                 const axisHeight = motivosAxis.offsetHeight || 1;
@@ -951,12 +971,18 @@
                 let progress = (startY - rect.top) / totalDistance;
                 progress = Math.min(Math.max(progress, 0), 1);
 
+                // Uma vez desenhada, a linha (e os motivos revelados) não retrocedem
+                // ao rolar a página para cima novamente.
+                maxProgress = Math.max(maxProgress, progress);
+
                 motivosLineFill.style.transform = usesTranslate
-                    ? `translateX(-50%) scaleY(${progress})`
-                    : `scaleY(${progress})`;
+                    ? `translateX(-50%) scaleY(${maxProgress})`
+                    : `scaleY(${maxProgress})`;
 
                 motivoRows.forEach((row, i) => {
-                    row.classList.toggle('in-view', progress >= rowCenters[i] - 0.04);
+                    if (maxProgress >= rowCenters[i] - 0.04) {
+                        row.classList.add('in-view');
+                    }
                 });
             }
 
