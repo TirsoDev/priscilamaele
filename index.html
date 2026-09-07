@@ -1175,7 +1175,7 @@
             .footer-links { align-items: center; }
         }
         /* ================= Ajustes específicos da logo no mobile ================= */
-        @media (max-width: 768px) {
+@media (max-width: 768px) {
             .navbar .nav-logo-img {
                 height: 68px;
                 width: auto;
@@ -1191,17 +1191,19 @@
                 letter-spacing: clamp(0.5px, 0.8vw, 2px);
                 white-space: nowrap;
             }
-.agendamento { 
+
+            .agendamento { 
                 padding: 4rem 1.5rem 5rem; 
             }
+            
             .agendamento-card {
                 flex-direction: column;
                 text-align: center;
                 gap: 2.2rem;
-                padding: 1.6rem 0; /* Usa exatamente o mesmo padding vertical dos itens do FAQ e remove o excesso lateral */
+                padding: 1.6rem 0;
                 width: 100%;
                 max-width: 100%;
-                border: none; /* Garante que o painel flua igualzinho no mobile */
+                border: none;
                 background: transparent;
                 box-shadow: none;
             }
