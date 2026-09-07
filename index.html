@@ -833,10 +833,11 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
-            gap: 2.5rem; /* Ajustado proporcionalmente para a nova largura */
-            max-width: 760px; /* Padronizado com a largura do bloco de perguntas (.faq-list) */
+            gap: 4rem;
+            max-width: 760px; /* Alterado de 1000px para 760px para igualar ao FAQ */
             margin: 0 auto;
         }
+
         .agendamento-text {
             flex: 1;
             text-align: left;
@@ -1140,13 +1141,23 @@
             }
             .processo-step p { max-width: 100%; }
 
-            .agendamento { padding: 4rem 1.5rem 5rem; }
-            .agendamento-card {
-                flex-direction: column;
-                text-align: center;
-                gap: 2.2rem;
-                padding: 2.5rem 1.8rem;
-            }
+/* ================= Seção Agendamento & QR ================= */
+        .agendamento {
+            background-color: transparent;
+            padding: 6rem 2rem 7rem;
+            width: 100%;
+        }
+
+        .agendamento-card {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 2.5rem;
+            max-width: 760px; /* Mesma largura máxima do FAQ */
+            width: 100%;       /* Garante que ocupa 100% do espaço disponível até o limite max-width */
+            margin: 0 auto;
+        }
+
             .agendamento-text { text-align: center; }
             .agendamento-text p { max-width: 100%; margin-left: auto; margin-right: auto; }
             .agendamento-divider { display: none; }
@@ -1178,6 +1189,14 @@
                 font-size: clamp(1.5rem, 8vw, 2.4rem);
                 letter-spacing: clamp(0.5px, 0.8vw, 2px);
                 white-space: nowrap;
+            }
+            .agendamento { padding: 4rem 1rem 5rem; /* Reduz a margem lateral externa do container no mobile */ }
+            .agendamento-card {
+                flex-direction: column;
+                text-align: center;
+                gap: 2rem;
+                padding: 2.5rem 1.2rem; /* Padding interno equilibrado para aproveitar toda a largura no celular */
+                width: 100%;
             }
         }
 
