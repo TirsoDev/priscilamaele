@@ -822,7 +822,7 @@
             max-width: 640px;
         }
 
-/* ================= Seção Agendamento & QR ================= */
+        /* ================= Seção Agendamento & QR ================= */
         .agendamento {
             background-color: transparent;
             padding: 6rem 2rem 7rem;
@@ -833,9 +833,8 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
-            gap: 2.5rem;
-            max-width: 760px; /* Mesma largura máxima do FAQ */
-            width: 100%;       /* Garante que ocupa 100% do espaço disponível até o limite max-width */
+            gap: 4rem;
+            max-width: 1000px;
             margin: 0 auto;
         }
 
@@ -1164,7 +1163,8 @@
             }
             .footer-links { align-items: center; }
         }
-        /* ================= Ajustes específicos da logo no mobile ================= */
+
+/* ================= Ajustes específicos da logo e componentes no mobile ================= */
         @media (max-width: 768px) {
             .navbar .nav-logo-img {
                 height: 68px;
@@ -1181,7 +1181,37 @@
                 letter-spacing: clamp(0.5px, 0.8vw, 2px);
                 white-space: nowrap;
             }
+
+            /* Correção definitiva para o card de agendamento ficar idêntico ao FAQ no celular */
+            .agendamento { 
+                padding: 4rem 1.5rem 5rem; 
+            }
+            
+            .agendamento-card {
+                flex-direction: column;
+                text-align: center;
+                gap: 2.2rem;
+                padding: 2rem 1.5rem;
+                width: 100%;
+                max-width: 100%;
+                box-sizing: border-box;
+            }
+
+            .agendamento-text { text-align: center; }
+            .agendamento-text p { max-width: 100%; margin-left: auto; margin-right: auto; }
+            .agendamento-divider { display: none; }
+            .title-wine-box { font-size: 0.9rem; padding: 15px 25px; letter-spacing: 1px; width: 100%; text-align: center; }
+            .qr-box { width: 150px; height: 150px; }
         }
+        
+        /* Garante que FAQ e Agendamento tenham exatamente a mesma largura máxima no PC */
+.faq-list.paper-panel, 
+.agendamento-card.paper-panel {
+    max-width: 760px; /* Altere para o valor que você preferir (ex: 800px ou 900px), desde que seja o mesmo para ambos */
+    margin-left: auto;
+    margin-right: auto;
+    box-sizing: border-box;
+}
 
     </style>
 <body>
@@ -1411,7 +1441,7 @@ Se você busca entender melhor uma questão jurídica antes de tomar uma decisã
 
 <!-- Seção Agendamento & QR -->
 <section class="agendamento" id="agendamento">
-    <div class="container" style="padding: 0 2rem;">
+    <div class="container">
         <div class="agendamento-card paper-panel">
             <div class="agendamento-text">
                 <span class="subtitle">ORIENTAÇÃO JURÍDICA. SOLUÇÕES ESTRATÉGICAS. DECISÕES SEGURAS.</span>
