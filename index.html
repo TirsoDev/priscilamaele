@@ -829,13 +829,14 @@
             width: 100%;
         }
 
-.agendamento-card {
+        .agendamento-card {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            gap: 4rem;
-            max-width: 760px; /* Alterado de 1000px para 760px para igualar ao FAQ */
+            gap: 2.5rem;
+            max-width: 760px; /* Igual ao .faq-list */
             margin: 0 auto;
+            width: 100%;
         }
 
         .agendamento-text {
@@ -1142,7 +1143,6 @@
             .processo-step p { max-width: 100%; }
 
 /* ================= Seção Agendamento & QR ================= */
-/* ================= Seção Agendamento & QR ================= */
         .agendamento {
             background-color: transparent;
             padding: 6rem 2rem 7rem;
@@ -1175,7 +1175,7 @@
             .footer-links { align-items: center; }
         }
         /* ================= Ajustes específicos da logo no mobile ================= */
-@media (max-width: 768px) {
+        @media (max-width: 768px) {
             .navbar .nav-logo-img {
                 height: 68px;
                 width: auto;
@@ -1191,19 +1191,17 @@
                 letter-spacing: clamp(0.5px, 0.8vw, 2px);
                 white-space: nowrap;
             }
-
-            .agendamento { 
+.agendamento { 
                 padding: 4rem 1.5rem 5rem; 
             }
-            
             .agendamento-card {
                 flex-direction: column;
                 text-align: center;
                 gap: 2.2rem;
-                padding: 1.6rem 0;
+                padding: 1.6rem 0; /* Usa exatamente o mesmo padding vertical dos itens do FAQ e remove o excesso lateral */
                 width: 100%;
                 max-width: 100%;
-                border: none;
+                border: none; /* Garante que o painel flua igualzinho no mobile */
                 background: transparent;
                 box-shadow: none;
             }
