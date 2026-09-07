@@ -28,9 +28,11 @@
             --white: #ffffff;
             --text-dark: #2c2c2c;
             --text-muted: #555555;
+            --text-on-dark: rgba(250, 248, 242, 0.82);
             --whatsapp-green: #25d366;
             --shadow-sm: 0 4px 20px rgba(0,0,0,0.04);
             --shadow-lg: 0 15px 35px rgba(31, 5, 9, 0.15);
+            --shadow-card: 0 25px 50px rgba(0,0,0,0.45), 0 0 0 1px rgba(212,175,55,0.1);
         }
 
         /* ================= Reset e Base ================= */
@@ -49,8 +51,11 @@
 
         body {
             font-family: 'Montserrat', sans-serif;
-            background-color: var(--cream);
-            color: var(--wine);
+            background-color: var(--wine-dark);
+            background-image:
+                radial-gradient(ellipse 90% 60% at 50% 0%, rgba(85, 22, 37, 0.55), transparent 65%),
+                repeating-linear-gradient(135deg, rgba(212,175,55,0.025) 0px, rgba(212,175,55,0.025) 1px, transparent 1px, transparent 34px);
+            color: var(--text-on-dark);
             line-height: 1.7;
             overflow-x: hidden;
             display: flex;
@@ -72,13 +77,22 @@
             top: 0;
             left: 0;
             width: 100%;
-            background-color: var(--wine-dark);
+            background-color: rgba(43, 10, 18, 0.55);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
             display: flex;
             justify-content: space-between;
             align-items: center;
             padding: 0.1rem 1rem 0.1rem 2rem;
             z-index: 1000;
-            border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+            border-bottom: 1px solid rgba(212, 175, 55, 0.15);
+            box-shadow: none;
+            transition: background-color 0.4s ease, box-shadow 0.4s ease, border-color 0.4s ease;
+        }
+
+        .navbar.is-scrolled {
+            background-color: rgba(43, 10, 18, 0.92);
+            border-bottom-color: rgba(212, 175, 55, 0.25);
             box-shadow: 0 4px 15px rgba(0,0,0,0.3);
         }
 
@@ -161,7 +175,7 @@
         .section-title {
             text-align: center;
             font-size: 2.4rem;
-            color: var(--wine);
+            color: var(--gold-light);
             margin-bottom: 4rem;
             text-transform: uppercase;
             letter-spacing: 3px;
@@ -169,6 +183,16 @@
             display: flex;
             flex-direction: column;
             align-items: center;
+        }
+
+        .section-title::before {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 1px;
+            background: var(--gold);
+            opacity: 0.55;
+            margin-bottom: 1.4rem;
         }
 
         .section-title::after {
@@ -211,6 +235,32 @@
             pointer-events: none;
         }
 
+        .hero::after {
+            content: '';
+            position: absolute;
+            top: 50%; left: 50%;
+            width: 60vw;
+            max-width: 780px;
+            height: 60vw;
+            max-height: 780px;
+            background: radial-gradient(circle, rgba(212,175,55,0.16), transparent 65%);
+            transform: translate(-50%, -50%);
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .hero-line {
+            z-index: 1;
+            position: relative;
+            width: 46px;
+            height: 1px;
+            background: var(--gold);
+            opacity: 0.6;
+        }
+
+        .hero-line.top { margin-bottom: 1.6rem; }
+        .hero-line.bottom { margin-top: 2.2rem; }
+
         .hero-logo, .hero-subtitle {
             z-index: 1;
             position: relative;
@@ -248,9 +298,45 @@
             font-weight: 700;
         }
 
+        .hero-lead {
+            z-index: 1;
+            position: relative;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 300;
+            font-size: 1.05rem;
+            color: var(--gold-light);
+            opacity: 0.85;
+            max-width: 480px;
+            margin: 1.8rem auto 0;
+            line-height: 1.8;
+        }
+
+        .hero-cta {
+            z-index: 1;
+            position: relative;
+            display: inline-block;
+            margin-top: 2.5rem;
+            padding: 16px 42px;
+            background: transparent;
+            color: var(--gold);
+            border: 1px solid var(--gold);
+            border-radius: 30px;
+            font-family: 'Cinzel', serif;
+            font-size: 0.85rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            text-decoration: none;
+            transition: background 0.35s ease, color 0.35s ease;
+        }
+
+        .hero-cta:hover {
+            background: var(--gold);
+            color: var(--wine-dark);
+        }
+
         /* ================= Seção Motivos — Eixo Central ================= */
         .motivos-container {
-            background-color: var(--cream);
+            background-color: transparent;
             width: 100%;
             overflow: hidden;
         }
@@ -356,7 +442,7 @@
             height: 11px;
             border-radius: 50%;
             background: var(--gold);
-            border: 2px solid var(--cream);
+            border: 2px solid var(--wine-dark);
             box-shadow: 0 0 0 1px var(--gold);
             transform: translate(-50%, -50%);
             z-index: 2;
@@ -414,139 +500,421 @@
             font-family: 'Cinzel', serif;
             font-size: 1.05rem;
             margin-bottom: 0.4rem;
-            color: var(--wine);
+            color: var(--gold-light);
             font-weight: 600;
             letter-spacing: 1.5px;
         }
 
         .motivo-text p {
             font-size: 0.95rem;
-            color: var(--text-muted);
+            color: var(--text-on-dark);
             margin: 0;
+            opacity: 0.85;
+        }
+
+        /* ================= Componente: Painel de Papel ================= */
+        .paper-panel {
+            background: var(--cream);
+            border: 1px solid var(--gold);
+            border-radius: 20px;
+            box-shadow: var(--shadow-card);
+            padding: 3rem;
+        }
+
+        /* ================= Seção Sobre ================= */
+        .sobre {
+            background-color: transparent;
+            width: 100%;
+        }
+
+        .sobre-inner {
+            display: flex;
+            align-items: center;
+            gap: 4.5rem;
+        }
+
+        .sobre-monogram {
+            flex-shrink: 0;
+        }
+
+.sobre-monogram-ring {
+    width: 215px;
+    height: 215px;
+    border-radius: 50%;
+    border: 2px solid var(--gold);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    padding: 0;
+    box-sizing: border-box;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+    background-color: var(--white);
+}
+
+.sobre-monogram-ring img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+    display: block;
+    margin: 0;
+    padding: 0;
+}
+
+        .sobre-text {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .sobre-text p {
+            color: var(--text-muted);
+            font-size: 1rem;
+            margin-bottom: 1.3rem;
+        }
+
+        .sobre-text p:last-of-type {
+            margin-bottom: 0;
+        }
+
+        .sobre-quote {
+            margin: 1.8rem 0 0;
+            padding-left: 1.8rem;
+            border-left: 2px solid var(--gold);
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            font-size: 1.2rem;
+            color: var(--wine);
+            max-width: 560px;
         }
 
         /* ================= Seção Áreas de Atuação ================= */
-        .atuacao {
-            background-color: var(--white);
-            position: relative;
+/* ================= Seção Áreas de Atuação ================= */
+.atuacao {
+    background-color: transparent;
+    position: relative;
+    width: 100%;
+}
+
+.carousel-container {
+    width: 100%;
+    max-width: 1650px; /* Aumentado para acomodar os 5 cards na tela */
+    margin: 0 auto;
+    overflow: hidden;
+    position: relative;
+    padding: 40px 0 20px 0;
+    touch-action: pan-y;
+}
+.carousel-track {
+    display: flex;
+    align-items: center;
+    transition: transform 0.5s ease-in-out;
+    width: max-content;
+}
+
+
+
+.card {
+    width:235px; /* Cards levemente mais compactos para caberem 5 na largura */
+    height: 410px;
+    background: var(--white);
+    margin: 0 12px; /* Espaçamento lateral reduzido entre eles */
+    border-radius: 16px;
+    padding: 30px 20px;
+    text-align: center;
+    border: 2px solid transparent;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    box-shadow: var(--shadow-card);
+    transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+    transform: scale(0.85); /* Escala menor para os 4 cards ao redor */
+    opacity: 0.5; /* Visibilidade equilibrada para as pontas */
+    z-index: 1;
+    cursor: pointer;
+    overflow: hidden;
+    flex-shrink: 0;
+}
+
+.card.active {
+    transform: scale(1.05); /* Mantém o card do meio em evidência */
+    opacity: 1;
+    z-index: 10;
+    border: 2px solid var(--gold);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.45);
+}
+
+.card h3 {
+    font-family: 'Cinzel', serif;
+    font-size: 1.1rem;
+    margin-bottom: 0.8rem;
+    color: var(--wine);
+    text-transform: uppercase;
+    font-weight: 600;
+    letter-spacing: 1px;
+}
+
+.card p {
+    font-size: 0.88rem;
+    color: var(--text-muted);
+    line-height: 1.5;
+}
+
+/* Mapa: Barrinhas Douradas Afastadas */
+.indicadores {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    margin-top: 45px;
+    position: relative;
+    z-index: 15;
+}
+
+.indicador {
+    width: 40px;
+    height: 6px;
+    background-color: var(--gold);
+    border-radius: 4px;
+    opacity: 0.3;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    cursor: pointer;
+}
+
+.indicador.active {
+    opacity: 1;
+    transform: scaleY(1.2);
+}
+        /* ================= Seção Como Funciona ================= */
+        .processo {
+            background-color: transparent;
             width: 100%;
         }
 
-        .cards-grid {
+        .processo-grid {
+            position: relative;
             display: grid;
             grid-template-columns: repeat(4, 1fr);
-            gap: 2rem;
-            margin-top: 2rem;
-            width: 100%;
+            gap: 2.5rem;
+            margin-top: 1rem;
         }
 
-        .card {
-            background: var(--cream);
-            padding: 1.5rem 1.5rem;
-            border-radius: 8px;
+        .processo-grid::before {
+            content: '';
+            position: absolute;
+            top: 27px;
+            left: 12.5%;
+            right: 12.5%;
+            height: 1px;
+            background: rgba(212, 175, 55, 0.4);
+        }
+
+        .processo-step {
+            position: relative;
             text-align: center;
+            padding-top: 76px;
+        }
+
+        .processo-num {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            background: var(--wine-light);
             border: 1px solid var(--gold);
             display: flex;
-            flex-direction: column;
             align-items: center;
-            justify-content: flex-start;
-            height: 100%;
-            min-height: 270px;
-            position: relative;
-            z-index: 1;
-            box-shadow: var(--shadow-sm);
-            transition: transform 0.3s ease;
+            justify-content: center;
+            font-family: 'Playfair Display', serif;
+            font-weight: 600;
+            font-size: 1.25rem;
+            color: var(--gold-light);
+            z-index: 2;
+        }
+
+        .processo-step h3 {
+            font-family: 'Cinzel', serif;
+            font-size: 1rem;
+            letter-spacing: 1px;
+            color: var(--gold-light);
+            text-transform: uppercase;
+            margin-bottom: 0.6rem;
+            font-weight: 600;
+        }
+
+        .processo-step p {
+            font-size: 0.9rem;
+            color: var(--text-on-dark);
+            opacity: 0.8;
+            max-width: 240px;
+            margin: 0 auto;
+        }
+
+        /* ================= Seção FAQ ================= */
+        .faq {
+            background-color: transparent;
             width: 100%;
         }
 
-        .card:hover {
-            transform: translateY(-5px);
+        .faq-list {
+            max-width: 760px;
+            margin: 0 auto;
         }
 
-        .card h3 {
-            font-family: 'Cinzel', serif;
-            font-size: 1.1rem;
-            margin-bottom: 0.8rem;
+        .faq-item:first-child {
+            padding-top: 0;
+        }
+
+        .faq-item:last-child {
+            padding-bottom: 0;
+            border-bottom: none;
+        }
+
+        .faq-item {
+            border-bottom: 1px solid rgba(212, 175, 55, 0.35);
+            padding: 1.6rem 0;
+        }
+
+        .faq-item summary {
+            list-style: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1.5rem;
+            font-family: 'Playfair Display', serif;
+            font-size: 1.15rem;
             color: var(--wine);
-            text-transform: uppercase;
             font-weight: 600;
-            letter-spacing: 1px;
         }
 
-        .card p {
-            font-size: 0.88rem;
+        .faq-item summary::-webkit-details-marker {
+            display: none;
+        }
+
+        .faq-item summary::after {
+            content: '+';
+            flex-shrink: 0;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            border: 1px solid var(--gold);
+            color: var(--gold-dark);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.2rem;
+            transition: transform 0.3s ease;
+        }
+
+        .faq-item[open] summary::after {
+            content: '–';
+        }
+
+        .faq-item p {
+            margin-top: 1rem;
             color: var(--text-muted);
-            line-height: 1.5;
+            font-size: 0.95rem;
+            max-width: 640px;
         }
 
         /* ================= Seção Agendamento & QR ================= */
         .agendamento {
-            text-align: center;
-            background-color: var(--cream);
-            padding-bottom: 7rem;
+            background-color: transparent;
+            padding: 6rem 2rem 7rem;
             width: 100%;
         }
 
-        .agendamento h2 {
-            font-size: 3.5rem;
-            color: var(--wine);
-            margin-bottom: 1rem;
-            line-height: 1.2;
-            white-space: nowrap;
+        .agendamento-card {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 4rem;
+            max-width: 1000px;
+            margin: 0 auto;
         }
 
-        .agendamento .subtitle {
+        .agendamento-text {
+            flex: 1;
+            text-align: left;
+        }
+
+        .agendamento-text .subtitle {
+            display: block;
             font-family: 'Cinzel', serif;
             font-weight: 500;
-            letter-spacing: 3px;
-            margin-bottom: 2.5rem;
-            font-size: 0.95rem;
+            letter-spacing: 2.5px;
+            margin-bottom: 1.2rem;
+            font-size: 0.85rem;
             background: linear-gradient(135deg, #d4af37 0%, #aa820a 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
 
-.title-wine-box {
+        .agendamento-text p {
+            color: var(--text-muted);
+            max-width: 460px;
+            margin-bottom: 2rem;
+        }
+
+        .title-wine-box {
             display: inline-block;
             background: linear-gradient(135deg, var(--wine) 0%, var(--wine-dark) 100%);
             color: var(--white);
-            padding: 18px 50px;
-            border-radius: 8px;
+            padding: 17px 42px;
+            border-radius: 30px;
             font-family: 'Cinzel', serif;
             font-weight: 600;
-            font-size: 1.1rem;
-            letter-spacing: 3px;
-            border: 2px solid var(--gold); /* Borda ao redor de todo o elemento */
-            margin-top: 1rem;
+            font-size: 1rem;
+            letter-spacing: 2.5px;
+            border: 2px solid var(--gold);
             text-transform: uppercase;
+            text-decoration: none;
             position: relative;
             overflow: hidden;
-            box-shadow: 0 10px 20px rgba(31, 5, 9, 0.2);
+            box-shadow: 0 10px 20px rgba(31, 5, 9, 0.3);
+            transition: transform 0.25s ease, box-shadow 0.25s ease;
         }
+
+        .title-wine-box:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 14px 26px rgba(31, 5, 9, 0.4);
+        }
+
+        .agendamento-divider {
+            width: 1px;
+            align-self: stretch;
+            background: rgba(212, 175, 55, 0.3);
+        }
+
         .qr-section {
-            margin-top: 3.5rem;
             display: flex;
             flex-direction: column;
             align-items: center;
-            width: 100%;
+            flex-shrink: 0;
         }
 
         .qr-text {
             font-family: 'Playfair Display', serif;
-            font-size: 1.3rem;
+            font-size: 1.05rem;
             color: var(--wine);
-            margin-bottom: 1.5rem;
+            margin-bottom: 1.2rem;
             font-style: italic;
+            white-space: nowrap;
         }
 
         .qr-box {
             background: var(--white);
-            padding: 18px;
-            border-radius: 8px;
-            box-shadow: var(--shadow-lg);
+            padding: 14px;
+            border-radius: 20px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
             border: 1px solid var(--gold);
-            width: 200px;
-            height: 200px;
+            width: 170px;
+            height: 170px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -558,70 +926,99 @@
             height: auto;
         }
 
-        /* ================= Botão Flutuante do WhatsApp ================= */
-        .whatsapp-float {
-            position: fixed;
-            bottom: 25px;
-            right: 25px;
-            background: linear-gradient(135deg, #f9eedc 0%, #d4af37 40%, #aa820a 100%);
-            color: var(--white);
-            width: 65px;
-            height: 65px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 2.2rem;
-            box-shadow: 0 6px 15px rgba(170, 130, 10, 0.4), inset 0 2px 4px rgba(255, 255, 255, 0.7), inset 0 -3px 4px rgba(0, 0, 0, 0.2);
-            z-index: 1000;
-            transition: all 0.2s ease;
-            text-decoration: none;
-            border: 1px solid #fff;
-        }
-
-        .whatsapp-float:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 9px 20px rgba(170, 130, 10, 0.5), inset 0 2px 4px rgba(255, 255, 255, 0.8), inset 0 -3px 4px rgba(0, 0, 0, 0.2);
-        }
-
-        /* ================= Botão Flutuante do Instagram ================= */
-        .instagram-float {
-            position: fixed;
-            bottom: 105px;
-            right: 25px;
-            background: linear-gradient(135deg, #f9eedc 0%, #d4af37 40%, #aa820a 100%);
-            color: var(--white);
-            width: 65px;
-            height: 65px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 2.2rem;
-            box-shadow: 0 6px 15px rgba(170, 130, 10, 0.4), inset 0 2px 4px rgba(255, 255, 255, 0.7), inset 0 -3px 4px rgba(0, 0, 0, 0.2);
-            z-index: 1000;
-            transition: all 0.2s ease;
-            text-decoration: none;
-            border: 1px solid #fff;
-        }
-
-        .instagram-float:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 9px 20px rgba(170, 130, 10, 0.5), inset 0 2px 4px rgba(255, 255, 255, 0.8), inset 0 -3px 4px rgba(0, 0, 0, 0.2);
-        }
-
-
         /* ================= Footer ================= */
         .footer-vinho {
             background-color: var(--wine-dark);
             color: var(--gold-light);
-            text-align: center;
-            padding: 2.5rem 2rem;
-            font-size: 0.9rem;
-            letter-spacing: 2px;
+            padding: 4rem 2rem 2rem;
             width: 100%;
             margin-top: auto;
             border-top: 2px solid var(--gold);
+        }
+
+        .footer-inner {
+            max-width: 1350px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 3rem;
+            padding-bottom: 2.5rem;
+            border-bottom: 1px solid rgba(212, 175, 55, 0.25);
+        }
+
+        .footer-brand {
+            max-width: 340px;
+        }
+
+        .footer-brand-name {
+            font-family: 'Cinzel', serif;
+            font-size: 1.1rem;
+            letter-spacing: 2px;
+            font-weight: 600;
+            background: linear-gradient(135deg, #f9eedc 0%, #d4af37 50%, #aa820a 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .footer-brand p {
+            margin-top: 0.9rem;
+            font-size: 0.85rem;
+            line-height: 1.7;
+            color: rgba(243, 229, 171, 0.75);
+        }
+
+        .footer-links {
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+        }
+
+        .footer-links a {
+            color: var(--gold-light);
+            text-decoration: none;
+            font-size: 0.88rem;
+            letter-spacing: 0.5px;
+            opacity: 0.85;
+            transition: opacity 0.25s ease;
+        }
+
+        .footer-links a:hover {
+            opacity: 1;
+            color: var(--gold);
+        }
+
+        .footer-social {
+            display: flex;
+            gap: 1rem;
+            align-items: flex-start;
+        }
+
+        .footer-social a {
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            border: 1px solid var(--gold);
+            color: var(--gold);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            text-decoration: none;
+            transition: background 0.25s ease, color 0.25s ease;
+        }
+
+        .footer-social a:hover {
+            background: var(--gold);
+            color: var(--wine-dark);
+        }
+
+        .footer-copy {
+            text-align: center;
+            padding-top: 1.8rem;
+            font-size: 0.82rem;
+            letter-spacing: 1px;
+            color: rgba(243, 229, 171, 0.7);
         }
 
         /* ================= Responsividade ================= */
@@ -656,15 +1053,17 @@
             .nav-logo-text {
                 display: none !important;
             }
-            .nav-menu { display: none; /* Poderia adicionar menu mobile depois se desejar */ }
+            .nav-menu { display: none; }
             
             .hero { margin-top: 61px; }
             .hero-subtitle { font-size: 0.8rem; letter-spacing: 3px; }
+            .hero-lead { font-size: 0.92rem; padding: 0 0.5rem; margin-top: 1.4rem; }
+            .hero-cta { padding: 13px 32px; font-size: 0.78rem; margin-top: 1.8rem; }
             
             .container { padding: 4rem 1.5rem; width: 100%; }
             .section-title { font-size: 1.8rem; }
+            .paper-panel { padding: 2rem 1.5rem; }
             
-            /* No mobile o eixo central vira uma linha à esquerda, com os itens empilhados */
             .motivos-axis::before {
                 left: 32px;
                 transform: none;
@@ -701,30 +1100,68 @@
             .motivo-text h3 { font-size: 0.95rem; }
             .motivo-text p { font-size: 0.88rem; }
 
-            .cards-grid { grid-template-columns: 1fr; }
-            .card { min-height: auto; height: auto; padding: 2.5rem 1.5rem; }
 
-            .agendamento h2 { 
-                font-size: 2.2rem; 
-                white-space: normal; 
+            .sobre-inner {
+                flex-direction: column;
+                text-align: center;
+                gap: 2rem;
             }
+            .sobre-monogram-ring { width: 150px; height: 150px; padding: 9px; }
+            .sobre-title { text-align: center; align-items: center; font-size: 1.7rem; }
+            .sobre-text p { max-width: 100%; }
+            .sobre-quote {
+                margin-left: auto;
+                margin-right: auto;
+                text-align: left;
+                font-size: 1.05rem;
+            }
+
+            .processo-grid {
+                grid-template-columns: 1fr;
+                gap: 2.4rem;
+            }
+            .processo-grid::before {
+                top: 6px;
+                bottom: 6px;
+                left: 27px;
+                right: auto;
+                width: 1px;
+                height: auto;
+            }
+            .processo-step {
+                text-align: left;
+                padding-top: 0;
+                padding-left: 76px;
+                min-height: 56px;
+            }
+            .processo-num {
+                left: 27px;
+                top: 0;
+                transform: translateX(-50%);
+            }
+            .processo-step p { max-width: 100%; }
+
+            .agendamento { padding: 4rem 1.5rem 5rem; }
+            .agendamento-card {
+                flex-direction: column;
+                text-align: center;
+                gap: 2.2rem;
+                padding: 2.5rem 1.8rem;
+            }
+            .agendamento-text { text-align: center; }
+            .agendamento-text p { max-width: 100%; margin-left: auto; margin-right: auto; }
+            .agendamento-divider { display: none; }
             .title-wine-box { font-size: 0.9rem; padding: 15px 25px; letter-spacing: 1px; width: 100%; text-align: center; }
+            .qr-box { width: 150px; height: 150px; }
             
-            .whatsapp-float {
-                width: 55px;
-                height: 55px;
-                font-size: 1.8rem;
-                bottom: 20px;
-                right: 20px;
+            .footer-vinho { padding: 3rem 1.5rem 1.8rem; }
+            .footer-inner {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+                gap: 2rem;
             }
-
-            .instagram-float {
-                width: 55px;
-                height: 55px;
-                font-size: 1.8rem;
-                bottom: 87px;
-                right: 20px;
-            }
+            .footer-links { align-items: center; }
         }
         /* ================= Ajustes específicos da logo no mobile ================= */
         @media (max-width: 768px) {
@@ -745,10 +1182,7 @@
             }
         }
 
-        
-
     </style>
-</head>
 <body>
 
     <!-- Barra de Navegação Superior -->
@@ -760,14 +1194,19 @@
         <ul class="nav-menu">
             <li class="nav-item"><a href="#hero" class="nav-link active">Início</a></li>
             <li class="nav-item"><a href="#motivos" class="nav-link">Motivos</a></li>
+            <li class="nav-item"><a href="#sobre" class="nav-link">Sobre</a></li>
             <li class="nav-item"><a href="#atuacao" class="nav-link">Atuação</a></li>
             <li class="nav-item"><a href="#agendamento" class="nav-link">Contato</a></li>
         </ul>
     </nav>
 
     <header class="hero" id="hero">
+        <div class="hero-line top"></div>
         <h1 class="hero-logo">PRISCILA MAELE</h1>
         <p class="hero-subtitle">Consultoria Jurídica</p>
+        <div class="hero-line bottom"></div>
+        <p class="hero-lead">Orientação jurídica estratégica para pessoas e empresas, com escuta atenta e solução sob medida para cada caso.</p>
+        <a href="#agendamento" class="hero-cta">Agendar uma consulta</a>
     </header>
 
     <!-- Seção Motivos em Carrossel -->
@@ -803,7 +1242,7 @@
                         <div class="motivo-icon"><i class="fa-regular fa-file-lines"></i></div>
                         <div class="motivo-text">
                             <h3>REDUÇÃO DE CUSTOS</h3>
-                            <p>Evite processos morosos e gastos desnecessários através de planejamento e estratégia.</p>
+                            <p>Evite desgastes morosos e gastos desnecessários através de planejamento e estratégia.</p>
                         </div>
                     </div>
                 </div>
@@ -813,7 +1252,7 @@
                         <div class="motivo-icon"><i class="fa-solid fa-users"></i></div>
                         <div class="motivo-text">
                             <h3>PROTEÇÃO DE DIREITOS</h3>
-                            <p>Garanta seus direitos e proteja seus interesses patrimoniais em todas as situações.</p>
+                            <p>Garanta clareza sobre seus direitos e proteja seus interesses patrimoniais em todas as situações.</p>
                         </div>
                     </div>
                 </div>
@@ -823,7 +1262,7 @@
                         <div class="motivo-icon"><i class="fa-solid fa-chart-line"></i></div>
                         <div class="motivo-text">
                             <h3>TRANQUILIDADE E SEGURANÇA</h3>
-                            <p>Conte com suporte jurídico de excelência para ter paz de espírito no seu dia a dia.</p>
+                            <p>Conte com suporte consultivo de excelência para ter paz de espírito no seu dia a dia.</p>
                         </div>
                     </div>
                 </div>
@@ -832,12 +1271,40 @@
         </div>
     </section>
 
-    <!-- Seção Áreas de Atuação -->
-    <section class="atuacao" id="atuacao">
+    <!-- Seção Sobre -->
+    <section class="sobre" id="sobre">
         <div class="container">
-            <h2 class="section-title">Áreas de Atuação</h2>
-            
-            <div class="cards-grid" id="atuacaoCards">
+            <h2 class="section-title">Sobre Priscila Maele</h2>
+            <div class="sobre-inner">
+                <div class="sobre-monogram">
+                    <div class="sobre-monogram-ring">
+                        <img src="perfil.png" alt="Foto de Priscila Maele">
+                    </div>
+                </div>
+                <div class="sobre-text paper-panel">
+                    <p>Sou Priscila Maele, e minha missão é tornar o Direito mais acessível para quem precisa de orientação em momentos importantes da vida.
+
+Atuo com consultoria jurídica nas áreas de Direito de Família, Sucessões, Direito Previdenciário e Direito do Trabalho, ajudando pessoas a compreender melhor seus direitos, deveres e possibilidades diante de cada situação.
+
+Acredito que informação clara e responsável é o primeiro passo para decisões seguras. Por isso, meu trabalho é traduzir questões jurídicas complexas em orientações práticas e acessíveis, sempre respeitando as particularidades de cada caso e os limites legais da atividade de consultoria.
+
+Se você busca entender melhor uma questão jurídica antes de tomar uma decisão, estou aqui para ajudar.</p>
+                    <p>Da orientação preventiva ao planejamento estratégico, o compromisso é sempre o mesmo: transparência, proximidade e diretrizes claras para cada decisão.</p>
+                    <blockquote class="sobre-quote">
+                        "Meu trabalho é dar segurança para quem precisa decidir — com clareza, cuidado e estratégia."
+                    </blockquote>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Seção Áreas de Atuação -->
+<section class="atuacao" id="atuacao">
+    <div class="container" style="text-align: center;">
+        <h2 class="section-title">Áreas de Atuação</h2>
+        
+        <div class="carousel-container" id="carousel-container" style="cursor: grab; user-select: none;">
+            <div class="carousel-track" id="carousel-track">
                 <div class="card">
                     <div class="card-icon"><i class="fa-solid fa-people-roof"></i></div>
                     <h3>Direito de Família</h3>
@@ -847,13 +1314,13 @@
                 <div class="card">
                     <div class="card-icon"><i class="fa-solid fa-building-columns"></i></div>
                     <h3>Direito Previdenciário</h3>
-                    <p>Orientação estratégica para a garantia de seus direitos perante o INSS e conquista de benefícios com assertividade e segurança.</p>
+                    <p>Análise de cenários e orientação estratégica sobre regras e requisitos de benefícios perante o INSS, com foco em clareza e planejamento.</p>
                 </div>
 
                 <div class="card">
                     <div class="card-icon"><i class="fa-solid fa-briefcase"></i></div>
                     <h3>Direito Trabalhista</h3>
-                    <p>Assessoria jurídica robusta para empregados e empregadores, com foco primordial em resoluções justas, preventivas e eficazes.</p>
+                    <p>Diretrizes e orientações preventivas sobre rotinas e relações de trabalho, auxiliando na compreensão de deveres e direitos trabalhistas.</p>
                 </div>
 
                 <div class="card">
@@ -861,56 +1328,165 @@
                     <h3>Direito das Sucessões</h3>
                     <p>Planejamento sucessório inteligente e orientação especializada para blindagem patrimonial, partilhas e inventários com absoluta tranquilidade.</p>
                 </div>
+                
+                <div class="card">
+                    <div class="card-icon"><i class="fa-solid fa-gavel"></i></div>
+                    <h3>Direito Imobiliário</h3>
+                    <p>Segurança jurídica em locações, compras, vendas, regularização de imóveis e contratos imobiliários.</p>
+                </div>
+
+                <div class="card">
+                    <div class="card-icon"><i class="fa-solid fa-handshake"></i></div>
+                    <h3>Mediação de Conflitos</h3>
+                    <p>Soluções consensuais e estratégicas para resolver impasses de forma rápida, sigilosa e eficiente.</p>
+                </div>
             </div>
         </div>
-    </section>
 
-    <!-- Seção Agendamento & QR -->
-    <section class="container agendamento" id="agendamento">
-        <div>
-            <p class="subtitle">ORIENTAÇÃO JURÍDICA. SOLUÇÕES ESTRATÉGICAS. DECISÕES SEGURAS.</p>
-            <p style="margin-bottom: 2rem; color: var(--text-muted); max-width: 600px; margin-left: auto; margin-right: auto;">
-                Conte com um atendimento altamente personalizado para mapear e encontrar o caminho mais seguro e eficiente para o seu caso.
-            </p>
-            
-            <div class="title-wine-box">AGENDE UMA CONSULTA</div>
-        </div>
+        <!-- Mapa: Barrinhas Douradas -->
+        <div class="indicadores" id="indicadores"></div>
+    </div>
+</section>
 
-        <div class="qr-section">
-            <p class="qr-text">Escaneie o código abaixo</p>
-            <div class="qr-box">
-                <img src="qr.png" alt="QR Code para Agendamento WhatsApp">
+<!-- Seção Como Funciona -->
+<section class="processo" id="processo">
+    <div class="container">
+        <h2 class="section-title">Como funciona o atendimento</h2>
+
+        <div class="processo-grid">
+            <div class="processo-step">
+                <div class="processo-num">01</div>
+                <h3>Primeiro contato</h3>
+                <p>Fale pelo WhatsApp ou agende pelo QR Code, contando em poucas palavras o que está acontecendo.</p>
+            </div>
+            <div class="processo-step">
+                <div class="processo-num">02</div>
+                <h3>Análise do caso</h3>
+                <p>Documentos e contexto são estudados com atenção, mapeando riscos, prazos e o caminho mais seguro.</p>
+            </div>
+            <div class="processo-step">
+                <div class="processo-num">03</div>
+                <h3>Consulta estratégica</h3>
+                <p>Um encontro dedicado para explicar o cenário jurídico com clareza e alinhar os próximos passos.</p>
+            </div>
+            <div class="processo-step">
+                <div class="processo-num">04</div>
+                <h3>Acompanhamento</h3>
+                <p>Acompanhamento e suporte consultivo contínuo para auxiliar no direcionamento e nas decisões até a conclusão da orientação.</p>
             </div>
         </div>
-    </section>
+    </div>
+</section>
 
-    <!-- Botão Flutuante do WhatsApp Dourado Elegante -->
-    <!-- Botão Flutuante do Instagram Dourado Elegante -->
-    <a href="https://www.instagram.com/priscilamaele.consultoria/" class="instagram-float" target="_blank" rel="noopener noreferrer" referrerpolicy="no-referrer" aria-label="Siga-nos no Instagram">
-        <i class="fa-brands fa-instagram"></i>
-    </a>
+<!-- Seção Perguntas Frequentes -->
+<section class="faq" id="faq">
+    <div class="container">
+        <h2 class="section-title">Perguntas frequentes</h2>
 
-    <a href="https://api.whatsapp.com/message/34QXQBTR6U5DC1?autoload=1&app_absent=0&utm_source=ig" class="whatsapp-float" target="_blank" rel="noopener noreferrer" referrerpolicy="no-referrer" aria-label="Fale conosco pelo WhatsApp">
-        <i class="fa-brands fa-whatsapp"></i>
-    </a>
+        <div class="faq-list paper-panel">
+            <details class="faq-item" open>
+                <summary>Como funciona a primeira consulta?</summary>
+                <p>Pode ser presencial ou online, após o agendamento pelo WhatsApp ou pelo QR Code disponível nesta página. Nela, o caso é ouvido com calma para entender o melhor caminho a seguir.</p>
+            </details>
+            <details class="faq-item">
+                <summary>É possível ser atendido totalmente online?</summary>
+                <p>Sim. Boa parte do acompanhamento pode ser feita à distância, com reuniões por vídeo e comunicação constante durante todo o processo.</p>
+            </details>
+            <details class="faq-item">
+                <summary>Quais documentos preciso levar?</summary>
+                <p>Documentos pessoais e qualquer material relacionado ao caso, como contratos, comunicações ou decisões judiciais. Se não tiver certeza do que separar, é só perguntar antes da consulta.</p>
+            </details>
+            <details class="faq-item">
+                <summary>Quanto tempo leva para receber um retorno?</summary>
+                <p>Casos urgentes recebem prioridade. De toda forma, o prazo esperado é sempre combinado já no primeiro contato, para que não haja surpresas.</p>
+            </details>
+            <details class="faq-item">
+                <summary>O valor da consulta é informado antes do atendimento?</summary>
+                <p>Sim. Os valores e a forma de cobrança são explicados com transparência antes de qualquer compromisso ser assumido.</p>
+            </details>
+        </div>
+    </div>
+</section>
 
-    <footer class="footer-vinho">
-        <p>PRISCILA MAELE &copy; <span id="current-year"></span> - Consultoria Jurídica. Todos os direitos reservados.</p>
-    </footer>
+<!-- Seção Agendamento & QR -->
+<section class="agendamento" id="agendamento">
+    <div class="container" style="padding: 0 2rem;">
+        <div class="agendamento-card paper-panel">
+            <div class="agendamento-text">
+                <span class="subtitle">ORIENTAÇÃO JURÍDICA. SOLUÇÕES ESTRATÉGICAS. DECISÕES SEGURAS.</span>
+                <p>Conte com um atendimento altamente personalizado para mapear e encontrar o caminho mais seguro e eficiente para o seu caso.</p>
+                <a href="https://api.whatsapp.com/message/34QXQBTR6U5DC1?autoload=1&app_absent=0&utm_source=ig" class="title-wine-box" target="_blank" rel="noopener noreferrer" referrerpolicy="no-referrer">Agende uma consulta</a>
+            </div>
 
-    <script>
-        document.getElementById('current-year').textContent = new Date().getFullYear();
+            <div class="agendamento-divider"></div>
 
-        // Alternância da classe active e linha dourada nos links ao rolar ou clicar
-        const navLinks = document.querySelectorAll('.nav-link');
-        navLinks.forEach(link => {
-            link.addEventListener('click', function() {
-                navLinks.forEach(l => l.classList.remove('active'));
-                this.classList.add('active');
-            });
+            <div class="qr-section">
+                <p class="qr-text">Escaneie para agendar</p>
+                <div class="qr-box">
+                    <img src="qr.png" alt="QR Code para Agendamento WhatsApp">
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<footer class="footer-vinho">
+    <div class="footer-inner">
+        <div class="footer-brand">
+            <span class="footer-brand-name">PRISCILA MAELE</span>
+            <p>Consultoria jurídica com escuta atenta e estratégia clara, em Direito de Família, Previdenciário, Trabalhista e Sucessões.</p>
+        </div>
+
+        <nav class="footer-links" aria-label="Links rápidos">
+            <a href="#hero">Início</a>
+            <a href="#sobre">Sobre</a>
+            <a href="#atuacao">Atuação</a>
+            <a href="#faq">Perguntas</a>
+            <a href="#agendamento">Contato</a>
+        </nav>
+
+        <div class="footer-social">
+            <a href="https://www.instagram.com/priscilamaele.consultoria/" target="_blank" rel="noopener noreferrer" referrerpolicy="no-referrer" aria-label="Instagram">
+                <i class="fa-brands fa-instagram"></i>
+            </a>
+            <a href="https://api.whatsapp.com/message/34QXQBTR6U5DC1?autoload=1&app_absent=0&utm_source=ig" target="_blank" rel="noopener noreferrer" referrerpolicy="no-referrer" aria-label="WhatsApp">
+                <i class="fa-brands fa-whatsapp"></i>
+            </a>
+        </div>
+    </div>
+
+    <p class="footer-copy">PRISCILA MAELE &copy; <span id="current-year"></span> - Consultoria Jurídica. Todos os direitos reservados.</p>
+</footer>
+
+<script>
+    document.getElementById('current-year').textContent = new Date().getFullYear();
+
+    // Navbar fica sólida assim que a página é rolada
+    const navbarEl = document.querySelector('.navbar');
+    function updateNavbarState() {
+        if (window.scrollY > 40) {
+            navbarEl.classList.add('is-scrolled');
+        } else {
+            navbarEl.classList.remove('is-scrolled');
+        }
+    }
+    if (navbarEl) {
+        window.addEventListener('scroll', updateNavbarState, { passive: true });
+        updateNavbarState();
+    }
+
+    // Alternância da classe active e linha dourada nos links ao rolar ou clicar
+    const navLinks = document.querySelectorAll('.nav-link');
+    navLinks.forEach(link => {
+        link.addEventListener('click', function() {
+            navLinks.forEach(l => l.classList.remove('active'));
+            this.classList.add('active');
         });
+    });
 
-        function triggerCoinSpin(element) {
+    // Efeito da moeda restrito estritamente ao card ativo/em evidência
+    function triggerCoinSpin(element) {
+        if (element.classList.contains('active')) {
             const icon = element.querySelector('.card-icon');
             if (icon) {
                 icon.classList.remove('spin-coin');
@@ -918,132 +1494,244 @@
                 icon.classList.add('spin-coin');
             }
         }
+    }
 
-        const cards = document.querySelectorAll('.card');
-        cards.forEach(card => {
-            card.addEventListener('mouseenter', () => {
-                triggerCoinSpin(card);
+    // Linha do tempo dos motivos
+    const motivosAxis = document.getElementById('motivosList') ? document.querySelector('.motivos-axis') : null;
+    const motivosLineFill = document.getElementById('motivosLineFill');
+    const motivoRows = Array.from(document.querySelectorAll('.motivo-row'));
+
+    if (motivosAxis && motivosLineFill && motivoRows.length) {
+        let rowCenters = [];
+        let usesTranslate = true;
+        let maxProgress = 0;
+
+        function recalcRowCenters() {
+            const axisHeight = motivosAxis.offsetHeight || 1;
+            rowCenters = motivoRows.map(row => {
+                const center = row.offsetTop + row.offsetHeight / 2;
+                return Math.min(Math.max(center / axisHeight, 0), 1);
             });
-        });
-
-        // No mobile não existe "hover", então giramos a moeda toda vez que o
-        // card entra na tela ao rolar a página (para cima ou para baixo).
-        if ('IntersectionObserver' in window && cards.length) {
-            const cardsObserver = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        triggerCoinSpin(entry.target);
-                    }
-                });
-            }, { threshold: 0.4 });
-
-            cards.forEach(card => cardsObserver.observe(card));
         }
 
-        // Linha do tempo dos motivos: desenha-se progressivamente conforme a rolagem,
-        // revelando cada motivo no instante em que a linha "chega" até ele.
-        const motivosAxis = document.getElementById('motivosList') ? document.querySelector('.motivos-axis') : null;
-        const motivosLineFill = document.getElementById('motivosLineFill');
-        const motivoRows = Array.from(document.querySelectorAll('.motivo-row'));
+        function updateMotivosTimeline() {
+            const rect = motivosAxis.getBoundingClientRect();
+            const viewportHeight = window.innerHeight || document.documentElement.clientHeight;
 
-        if (motivosAxis && motivosLineFill && motivoRows.length) {
-            let rowCenters = [];
-            let usesTranslate = true;
-            let maxProgress = 0;
+            const startY = viewportHeight * 0.9;
+            const endY = viewportHeight * 0.25;
+            const totalDistance = (startY - endY) + rect.height;
+            let progress = (startY - rect.top) / totalDistance;
+            progress = Math.min(Math.max(progress, 0), 1);
 
-            function recalcRowCenters() {
-                const axisHeight = motivosAxis.offsetHeight || 1;
-                rowCenters = motivoRows.map(row => {
-                    const center = row.offsetTop + row.offsetHeight / 2;
-                    return Math.min(Math.max(center / axisHeight, 0), 1);
-                });
-            }
+            maxProgress = Math.max(maxProgress, progress);
 
-            function updateMotivosTimeline() {
-                const rect = motivosAxis.getBoundingClientRect();
-                const viewportHeight = window.innerHeight || document.documentElement.clientHeight;
+            motivosLineFill.style.transform = usesTranslate
+                ? `translateX(-50%) scaleY(${maxProgress})`
+                : `scaleY(${maxProgress})`;
 
-                // A linha começa a se desenhar quando o topo do eixo entra na tela
-                // e termina de se desenhar um pouco antes do final sair pela parte de cima.
-                const startY = viewportHeight * 0.9;
-                const endY = viewportHeight * 0.25;
-                const totalDistance = (startY - endY) + rect.height;
-                let progress = (startY - rect.top) / totalDistance;
-                progress = Math.min(Math.max(progress, 0), 1);
-
-                // Uma vez desenhada, a linha (e os motivos revelados) não retrocedem
-                // ao rolar a página para cima novamente.
-                maxProgress = Math.max(maxProgress, progress);
-
-                motivosLineFill.style.transform = usesTranslate
-                    ? `translateX(-50%) scaleY(${maxProgress})`
-                    : `scaleY(${maxProgress})`;
-
-                motivoRows.forEach((row, i) => {
-                    if (maxProgress >= rowCenters[i] - 0.04) {
-                        row.classList.add('in-view');
-                    }
-                });
-            }
-
-            // Detecta se está no layout mobile (linha à esquerda, sem translateX)
-            function setInitialTransform() {
-                usesTranslate = window.innerWidth > 768;
-                motivosLineFill.style.transform = usesTranslate ? 'translateX(-50%) scaleY(0)' : 'scaleY(0)';
-            }
-
-            let ticking = false;
-            function onScrollOrResize() {
-                if (!ticking) {
-                    window.requestAnimationFrame(() => {
-                        updateMotivosTimeline();
-                        ticking = false;
-                    });
-                    ticking = true;
+            motivoRows.forEach((row, i) => {
+                if (maxProgress >= rowCenters[i] - 0.04) {
+                    row.classList.add('in-view');
                 }
-            }
+            });
+        }
 
+        function setInitialTransform() {
+            usesTranslate = window.innerWidth > 768;
+            motivosLineFill.style.transform = usesTranslate ? 'translateX(-50%) scaleY(0)' : 'scaleY(0)';
+        }
+
+        let ticking = false;
+        function onScrollOrResize() {
+            if (!ticking) {
+                window.requestAnimationFrame(() => {
+                    updateMotivosTimeline();
+                    ticking = false;
+                });
+                ticking = true;
+            }
+        }
+
+        setInitialTransform();
+        recalcRowCenters();
+        updateMotivosTimeline();
+
+        window.addEventListener('scroll', onScrollOrResize, { passive: true });
+        window.addEventListener('resize', () => {
             setInitialTransform();
             recalcRowCenters();
             updateMotivosTimeline();
+        });
+    }
 
-            window.addEventListener('scroll', onScrollOrResize, { passive: true });
-            window.addEventListener('resize', () => {
-                setInitialTransform();
-                recalcRowCenters();
-                updateMotivosTimeline();
+    // Carrossel em modo Ping-Pong com suporte a Toque / Arraste (Swipe)
+    document.addEventListener('DOMContentLoaded', () => {
+        const track = document.getElementById('carousel-track');
+        const container = document.getElementById('carousel-container');
+        const indicadoresContainer = document.getElementById('indicadores');
+        const cardsAtuacao = Array.from(document.querySelectorAll('#atuacao .card'));
+
+        if (track && container && cardsAtuacao.length && indicadoresContainer) {
+            let autoPlayInterval;
+            const tempoDeTransicao = 3000;
+            let currentIndex = 0;
+            let direcao = 1; // 1 avança, -1 retrocede
+
+            let startX = 0;
+            let currentX = 0;
+            let isDragging = false;
+            let dragOffsetX = 0;
+
+            // 1. Criação dos indicadores
+            cardsAtuacao.forEach((_, index) => {
+                const barra = document.createElement('div');
+                barra.classList.add('indicador');
+                if (index === 0) barra.classList.add('active');
+                
+                barra.addEventListener('click', () => {
+                    currentIndex = index;
+                    direcao = (currentIndex === cardsAtuacao.length - 1) ? -1 : (currentIndex === 0 ? 1 : direcao);
+                    atualizarCarrossel(true);
+                    reiniciarAutoPlay();
+                });
+                indicadoresContainer.appendChild(barra);
             });
+
+            const indicadores = document.querySelectorAll('.indicador');
+
+            cardsAtuacao.forEach((card, index) => {
+                card.addEventListener('click', () => {
+                    if (Math.abs(dragOffsetX) < 5) { // Evita disparar o clique se estiver arrastando
+                        currentIndex = index;
+                        direcao = (currentIndex === cardsAtuacao.length - 1) ? -1 : (currentIndex === 0 ? 1 : direcao);
+                        atualizarCarrossel(true);
+                        reiniciarAutoPlay();
+                    }
+                });
+            });
+
+            function atualizarCarrossel(comTransition = true) {
+                cardsAtuacao.forEach(c => c.classList.remove('active'));
+                indicadores.forEach(ind => ind.classList.remove('active'));
+
+                const activeCard = cardsAtuacao[currentIndex];
+                if (activeCard) {
+                    activeCard.classList.add('active');
+                    triggerCoinSpin(activeCard);
+
+                    if (indicadores[currentIndex]) {
+                        indicadores[currentIndex].classList.add('active');
+                    }
+
+                    track.style.transition = comTransition ? 'transform 0.5s ease-in-out' : 'none';
+
+                    const containerCenter = container.getBoundingClientRect().width / 2;
+                    const cardCenter = activeCard.offsetLeft + (activeCard.offsetWidth / 2);
+                    const deslocamento = containerCenter - cardCenter;
+                    
+                    track.style.transform = `translateX(${deslocamento}px)`;
+                }
+            }
+
+            function proximoSlide() {
+                if (currentIndex >= cardsAtuacao.length - 1) {
+                    direcao = -1;
+                } else if (currentIndex <= 0) {
+                    direcao = 1;
+                }
+
+                currentIndex += direcao;
+                atualizarCarrossel(true);
+            }
+
+            function iniciarAutoPlay() {
+                clearInterval(autoPlayInterval);
+                autoPlayInterval = setInterval(proximoSlide, tempoDeTransicao);
+            }
+
+            function pausarAutoPlay() {
+                clearInterval(autoPlayInterval);
+            }
+
+            function reiniciarAutoPlay() {
+                pausarAutoPlay();
+                iniciarAutoPlay();
+            }
+
+            // Funções de Arraste (Touch / Mouse)
+            function getPositionX(event) {
+                return event.type.includes('mouse') ? event.pageX : event.touches[0].clientX;
+            }
+
+            function dragStart(e) {
+                isDragging = true;
+                startX = getPositionX(e);
+                dragOffsetX = 0;
+                pausarAutoPlay();
+                track.style.transition = 'none';
+            }
+
+            function dragMove(e) {
+                if (!isDragging) return;
+                currentX = getPositionX(e);
+                dragOffsetX = currentX - startX;
+
+                const activeCard = cardsAtuacao[currentIndex];
+                const containerCenter = container.getBoundingClientRect().width / 2;
+                const cardCenter = activeCard.offsetLeft + (activeCard.offsetWidth / 2);
+                const baseDeslocamento = containerCenter - cardCenter;
+
+                track.style.transform = `translateX(${baseDeslocamento + dragOffsetX}px)`;
+            }
+
+            function dragEnd() {
+                if (!isDragging) return;
+                isDragging = false;
+
+                // Limiar de arraste para mudar de card (50px)
+                if (dragOffsetX < -50 && currentIndex < cardsAtuacao.length - 1) {
+                    currentIndex++;
+                    direcao = (currentIndex === cardsAtuacao.length - 1) ? -1 : direcao;
+                } else if (dragOffsetX > 50 && currentIndex > 0) {
+                    currentIndex--;
+                    direcao = (currentIndex === 0) ? 1 : direcao;
+                }
+
+                dragOffsetX = 0;
+                atualizarCarrossel(true);
+                reiniciarAutoPlay();
+            }
+
+            // Eventos Touch
+            container.addEventListener('touchstart', dragStart, { passive: true });
+            container.addEventListener('touchmove', dragMove, { passive: true });
+            container.addEventListener('touchend', dragEnd);
+
+            // Eventos Mouse
+            container.addEventListener('mousedown', (e) => {
+                dragStart(e);
+                e.preventDefault();
+            });
+            container.addEventListener('mousemove', dragMove);
+            container.addEventListener('mouseup', dragEnd);
+            container.addEventListener('mouseleave', () => {
+                if (isDragging) {
+                    dragEnd();
+                }
+            });
+
+            // Inicialização limpa
+            track.style.transition = 'none';
+            atualizarCarrossel(false);
+            iniciarAutoPlay();
+
+            container.addEventListener('mouseenter', pausarAutoPlay);
+            container.addEventListener('mouseleave', () => { if (!isDragging) iniciarAutoPlay(); });
+            
+            window.addEventListener('resize', () => atualizarCarrossel(false));
         }
-
-        // No mobile, o WhatsApp permanece flutuante normalmente e sobe
-        // automaticamente quando o rodapé entra na área que ele ocuparia.
-        const whatsappFloat = document.querySelector('.whatsapp-float');
-        const instagramFloat = document.querySelector('.instagram-float');
-        const footerVinho = document.querySelector('.footer-vinho');
-
-        function ajustarBotoesSociaisNoRodape() {
-            if (!whatsappFloat || !instagramFloat || !footerVinho) return;
-
-            const footerRect = footerVinho.getBoundingClientRect();
-            const margem = 20;
-            const gap = 12;
-            const alturaWhatsApp = whatsappFloat.offsetHeight;
-
-            // Posição normal: ambos ficam próximos à parte inferior da tela.
-            const bottomNormal = window.innerWidth <= 768 ? 20 : 25;
-            const bottomDoRodape = window.innerHeight - footerRect.top + margem;
-            const novoBottom = Math.max(bottomNormal, bottomDoRodape);
-
-            // WhatsApp fica acima do rodapé.
-            whatsappFloat.style.bottom = `${novoBottom}px`;
-
-            // Instagram fica acima do WhatsApp.
-            instagramFloat.style.bottom = `${novoBottom + alturaWhatsApp + gap}px`;
-        }
-
-        window.addEventListener('scroll', ajustarBotoesSociaisNoRodape, { passive: true });
-        window.addEventListener('resize', ajustarBotoesSociaisNoRodape);
-        ajustarBotoesSociaisNoRodape();
+    });
 </script>
 </body>
 </html>
