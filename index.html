@@ -613,7 +613,6 @@
 }
 
 
-
 .card {
     width:235px; /* Cards levemente mais compactos para caberem 5 na largura */
     height: 410px;
@@ -1022,198 +1021,316 @@
         }
 
         /* ================= Responsividade ================= */
-        @media (max-width: 1200px) {
-            .cards-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
 
-        @media (max-width: 992px) {
-            .hero-logo { font-size: 3.4rem; }
-            .section-title { font-size: 2.2rem; }
-            .nav-menu { gap: 1.5rem; }
-        }
-
-        @media (max-width: 768px) {
-            html {
-                overscroll-behavior-y: none;
-            }
-            body {
-                touch-action: pan-y;
-                overscroll-behavior: none;
-            }
-            .navbar {
-                justify-content: center !important;
-                padding: 0.6rem 1rem !important;
-            }
-            .nav-logo-link {
-                justify-content: center;
-                width: 100%;
-            }
-            .nav-logo-text {
-                display: none !important;
-            }
-            .nav-menu { display: none; }
-            
-            .hero { margin-top: 61px; }
-            .hero-subtitle { font-size: 0.8rem; letter-spacing: 3px; }
-            .hero-lead { font-size: 0.92rem; padding: 0 0.5rem; margin-top: 1.4rem; }
-            .hero-cta { padding: 13px 32px; font-size: 0.78rem; margin-top: 1.8rem; }
-            
-            .container { padding: 4rem 1.5rem; width: 100%; }
-            .section-title { font-size: 1.8rem; }
-            .paper-panel { padding: 2rem 1.5rem; }
-            
-            .motivos-axis::before {
-                left: 32px;
-                transform: none;
-            }
-            .motivos-line-fill {
-                left: 32px;
-                transform: scaleY(0);
-            }
-            .motivo-row,
-            .motivo-row:nth-child(even) {
-                justify-content: flex-start;
-            }
-            .motivo-item,
-            .motivo-row:nth-child(even) .motivo-item {
-                width: 100%;
-                padding-left: 4rem;
-                flex-direction: row;
-                text-align: left;
-            }
-            .motivo-item::after,
-            .motivo-row:nth-child(even) .motivo-item::after {
-                left: 32px;
-                right: auto;
-                width: 1.5rem;
-            }
-            .motivo-row::before {
-                left: 32px;
-            }
-            .motivo-icon {
-                width: 52px;
-                height: 52px;
-                font-size: 1.25rem;
-            }
-            .motivo-text h3 { font-size: 0.95rem; }
-            .motivo-text p { font-size: 0.88rem; }
-
-
-            .sobre-inner {
-                flex-direction: column;
-                text-align: center;
-                gap: 2rem;
-            }
-            .sobre-monogram-ring { width: 150px; height: 150px; padding: 9px; }
-            .sobre-title { text-align: center; align-items: center; font-size: 1.7rem; }
-            .sobre-text p { max-width: 100%; }
-            .sobre-quote {
-                margin-left: auto;
-                margin-right: auto;
-                text-align: left;
-                font-size: 1.05rem;
-            }
-
-            .processo-grid {
-                grid-template-columns: 1fr;
-                gap: 2.4rem;
-            }
-            .processo-grid::before {
-                top: 6px;
-                bottom: 6px;
-                left: 27px;
-                right: auto;
-                width: 1px;
-                height: auto;
-            }
-            .processo-step {
-                text-align: left;
-                padding-top: 0;
-                padding-left: 76px;
-                min-height: 56px;
-            }
-            .processo-num {
-                left: 27px;
-                top: 0;
-                transform: translateX(-50%);
-            }
-            .processo-step p { max-width: 100%; }
-
-            .agendamento { padding: 4rem 1.5rem 5rem; }
-            .agendamento-card {
-                flex-direction: column;
-                text-align: center;
-                gap: 2.2rem;
-                padding: 2.5rem 1.8rem;
-            }
-            .agendamento-text { text-align: center; }
-            .agendamento-text p { max-width: 100%; margin-left: auto; margin-right: auto; }
-            .agendamento-divider { display: none; }
-            .title-wine-box { font-size: 0.9rem; padding: 15px 25px; letter-spacing: 1px; width: 100%; text-align: center; }
-            .qr-box { width: 150px; height: 150px; }
-            
-            .footer-vinho { padding: 3rem 1.5rem 1.8rem; }
-            .footer-inner {
-                flex-direction: column;
-                align-items: center;
-                text-align: center;
-                gap: 2rem;
-            }
-            .footer-links { align-items: center; }
-        }
-
-/* ================= Ajustes específicos da logo e componentes no mobile ================= */
-        @media (max-width: 768px) {
-            .navbar .nav-logo-img {
-                height: 68px;
-                width: auto;
-                margin-top: 0;
-            }
-
-            .navbar .nav-logo-text {
-                display: none !important;
-            }
-
-            .hero .hero-logo {
-                font-size: clamp(1.5rem, 8vw, 2.4rem);
-                letter-spacing: clamp(0.5px, 0.8vw, 2px);
-                white-space: nowrap;
-            }
-
-            /* Correção definitiva para o card de agendamento ficar idêntico ao FAQ no celular */
-            .agendamento { 
-                padding: 4rem 1.5rem 5rem; 
-            }
-            
-            .agendamento-card {
-                flex-direction: column;
-                text-align: center;
-                gap: 2.2rem;
-                padding: 2rem 1.5rem;
-                width: 100%;
-                max-width: 100%;
-                box-sizing: border-box;
-            }
-
-            .agendamento-text { text-align: center; }
-            .agendamento-text p { max-width: 100%; margin-left: auto; margin-right: auto; }
-            .agendamento-divider { display: none; }
-            .title-wine-box { font-size: 0.9rem; padding: 15px 25px; letter-spacing: 1px; width: 100%; text-align: center; }
-            .qr-box { width: 150px; height: 150px; }
-        }
-        
-        /* Garante que FAQ e Agendamento tenham exatamente a mesma largura máxima no PC */
-.faq-list.paper-panel, 
-.agendamento-card.paper-panel {
-    max-width: 760px; /* Altere para o valor que você preferir (ex: 800px ou 900px), desde que seja o mesmo para ambos */
-    margin-left: auto;
-    margin-right: auto;
-    box-sizing: border-box;
+@media (max-width: 1200px) {
+    .cards-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
 }
 
-    </style>
+@media (max-width: 992px) {
+    .hero-logo { font-size: 3.4rem; }
+    .section-title { font-size: 2.2rem; }
+    .nav-menu { gap: 1.5rem; }
+}
+
+/* ================= Mobile ================= */
+@media (max-width: 768px) {
+
+    html {
+        overscroll-behavior-y: none;
+    }
+
+    body {
+        touch-action: pan-y;
+        overscroll-behavior: none;
+    }
+
+    .navbar {
+        justify-content: center !important;
+        padding: 0.6rem 1rem !important;
+    }
+
+    .nav-logo-link {
+        justify-content: center;
+        width: 100%;
+    }
+
+    .nav-logo-text {
+        display: none !important;
+    }
+
+    .nav-menu {
+        display: none;
+    }
+
+    .navbar .nav-logo-img {
+        height: 68px;
+        width: auto;
+        margin-top: 0;
+    }
+
+    .hero {
+        margin-top: 61px;
+    }
+
+    .hero .hero-logo {
+        font-size: clamp(1.5rem, 8vw, 2.4rem);
+        letter-spacing: clamp(0.5px, 0.8vw, 2px);
+        white-space: nowrap;
+    }
+
+    .hero-subtitle {
+        font-size: 0.8rem;
+        letter-spacing: 3px;
+    }
+
+    .hero-lead {
+        font-size: 0.92rem;
+        padding: 0 0.5rem;
+        margin-top: 1.4rem;
+    }
+
+    .hero-cta {
+        padding: 13px 32px;
+        font-size: 0.78rem;
+        margin-top: 1.8rem;
+    }
+
+    .container {
+        padding: 4rem 1.5rem;
+        width: 100%;
+    }
+
+    .section-title {
+        font-size: 1.8rem;
+    }
+
+    .paper-panel {
+        padding: 2rem 1.5rem;
+    }
+
+    /* Motivos */
+    .motivos-axis::before {
+        left: 32px;
+        transform: none;
+    }
+
+    .motivos-line-fill {
+        left: 32px;
+        transform: scaleY(0);
+    }
+
+    .motivo-row,
+    .motivo-row:nth-child(even) {
+        justify-content: flex-start;
+    }
+
+    .motivo-item,
+    .motivo-row:nth-child(even) .motivo-item {
+        width: 100%;
+        padding-left: 4rem;
+        flex-direction: row;
+        text-align: left;
+    }
+
+    .motivo-item::after,
+    .motivo-row:nth-child(even) .motivo-item::after {
+        left: 32px;
+        right: auto;
+        width: 1.5rem;
+    }
+
+    .motivo-row::before {
+        left: 32px;
+    }
+
+    .motivo-icon {
+        width: 52px;
+        height: 52px;
+        font-size: 1.25rem;
+    }
+
+    .motivo-text h3 {
+        font-size: 0.95rem;
+    }
+
+    .motivo-text p {
+        font-size: 0.88rem;
+    }
+
+    /* Sobre */
+    .sobre-inner {
+        flex-direction: column;
+        text-align: center;
+        gap: 2rem;
+    }
+
+    .sobre-monogram-ring {
+        width: 150px;
+        height: 150px;
+        padding: 9px;
+    }
+
+    .sobre-title {
+        text-align: center;
+        align-items: center;
+        font-size: 1.7rem;
+    }
+
+    .sobre-text p {
+        max-width: 100%;
+    }
+
+    .sobre-quote {
+        margin-left: auto;
+        margin-right: auto;
+        text-align: left;
+        font-size: 1.05rem;
+    }
+
+    /* Processo */
+    .processo-grid {
+        grid-template-columns: 1fr;
+        gap: 2.4rem;
+    }
+
+    .processo-grid::before {
+        top: 6px;
+        bottom: 6px;
+        left: 27px;
+        right: auto;
+        width: 1px;
+        height: auto;
+    }
+
+    .processo-step {
+        text-align: left;
+        padding-top: 0;
+        padding-left: 76px;
+        min-height: 56px;
+    }
+
+    .processo-num {
+        left: 27px;
+        top: 0;
+        transform: translateX(-50%);
+    }
+
+    .processo-step p {
+        max-width: 100%;
+    }
+
+    /* Agendamento */
+    .agendamento {
+        padding: 4rem 0 5rem;
+        width: 100%;
+    }
+
+    .agendamento .container {
+        width: 100%;
+        padding-left: 1.5rem;
+        padding-right: 1.5rem;
+        box-sizing: border-box;
+    }
+
+    .agendamento-card {
+        flex-direction: column;
+        text-align: center;
+        gap: 2.2rem;
+        padding: 2rem 1.5rem;
+        width: 100%;
+        max-width: 100%;
+        box-sizing: border-box;
+    }
+
+    .agendamento-text {
+        text-align: center;
+    }
+
+    .agendamento-text p {
+        max-width: 100%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .agendamento-divider {
+        display: none;
+    }
+
+    .title-wine-box {
+        font-size: 0.9rem;
+        padding: 15px 25px;
+        letter-spacing: 1px;
+        width: 100%;
+        text-align: center;
+    }
+
+    .qr-box {
+        width: 150px;
+        height: 150px;
+    }
+
+    /* FAQ e Agendamento com a mesma largura no mobile */
+    .faq .container {
+        width: 100%;
+        padding-left: 1.5rem;
+        padding-right: 1.5rem;
+        box-sizing: border-box;
+    }
+
+    .faq-list.paper-panel,
+    .agendamento-card.paper-panel {
+        width: 100%;
+        max-width: 100%;
+        margin-left: 0;
+        margin-right: 0;
+        box-sizing: border-box;
+    }
+
+    .faq .container {
+        padding-bottom: 0;
+    }
+
+    .agendamento .container {
+        padding-top: 0;
+    }
+
+    .agendamento .section-title {
+        margin-bottom: 0.5rem;
+    }
+
+    /* Footer */
+    .footer-vinho {
+        padding: 3rem 1.5rem 1.8rem;
+    }
+
+    .footer-inner {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        gap: 2rem;
+    }
+
+    .footer-links {
+        align-items: center;
+    }
+}
+
+/* ================= Largura dos painéis FAQ e Agendamento ================= */
+
+/* Desktop */
+@media (min-width: 769px) {
+    .faq-list.paper-panel,
+    .agendamento-card.paper-panel {
+        width: 100%;
+        max-width: 760px;
+        margin-left: auto;
+        margin-right: auto;
+        box-sizing: border-box;
+    }
+}
+</style>
 <body>
 
     <!-- Barra de Navegação Superior -->
@@ -1442,22 +1559,41 @@ Se você busca entender melhor uma questão jurídica antes de tomar uma decisã
 <!-- Seção Agendamento & QR -->
 <section class="agendamento" id="agendamento">
     <div class="container">
-        <div class="agendamento-card paper-panel">
+
+        <h2 class="section-title">Agendamento</h2>
+<div class="agendamento-card paper-panel">
+            
             <div class="agendamento-text">
-                <span class="subtitle">ORIENTAÇÃO JURÍDICA. SOLUÇÕES ESTRATÉGICAS. DECISÕES SEGURAS.</span>
-                <p>Conte com um atendimento altamente personalizado para mapear e encontrar o caminho mais seguro e eficiente para o seu caso.</p>
-                <a href="https://api.whatsapp.com/message/34QXQBTR6U5DC1?autoload=1&app_absent=0&utm_source=ig" class="title-wine-box" target="_blank" rel="noopener noreferrer" referrerpolicy="no-referrer">Agende uma consulta</a>
+                <span class="subtitle">
+                    ORIENTAÇÃO JURÍDICA. SOLUÇÕES ESTRATÉGICAS. DECISÕES SEGURAS.
+                </span>
+
+                <p>
+                    Conte com um atendimento altamente personalizado para mapear
+                    e encontrar o caminho mais seguro e eficiente para o seu caso.
+                </p>
+
+                <a href="https://api.whatsapp.com/message/34QXQBTR6U5DC1?autoload=1&app_absent=0&utm_source=ig"
+                   class="title-wine-box"
+                   target="_blank"
+                   rel="noopener noreferrer"
+                   referrerpolicy="no-referrer">
+                    Agende uma consulta
+                </a>
             </div>
 
             <div class="agendamento-divider"></div>
 
             <div class="qr-section">
                 <p class="qr-text">Escaneie para agendar</p>
+
                 <div class="qr-box">
                     <img src="qr.png" alt="QR Code para Agendamento WhatsApp">
                 </div>
             </div>
+
         </div>
+
     </div>
 </section>
 
