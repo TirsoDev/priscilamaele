@@ -823,8 +823,9 @@
         }
 
 /* ================= Seção Agendamento & QR ================= */
-.agendamento {
+        .agendamento {
             background-color: transparent;
+            padding: 6rem 2rem 7rem;
             width: 100%;
         }
 
@@ -833,9 +834,9 @@
             align-items: center;
             justify-content: space-between;
             gap: 2.5rem;
-            max-width: 760px; /* Idêntico ao .faq-list */
+            max-width: 760px; /* Mesma largura máxima do FAQ */
+            width: 100%;       /* Garante que ocupa 100% do espaço disponível até o limite max-width */
             margin: 0 auto;
-            width: 100%;
         }
 
         .agendamento-text {
@@ -1408,11 +1409,9 @@ Se você busca entender melhor uma questão jurídica antes de tomar uma decisã
     </div>
 </section>
 
-
 <!-- Seção Agendamento & QR -->
 <section class="agendamento" id="agendamento">
-    <div class="container">
-        <h2 class="section-title" style="display: none;">Agendamento</h2>
+    <div class="container" style="padding: 0 2rem;">
         <div class="agendamento-card paper-panel">
             <div class="agendamento-text">
                 <span class="subtitle">ORIENTAÇÃO JURÍDICA. SOLUÇÕES ESTRATÉGICAS. DECISÕES SEGURAS.</span>
